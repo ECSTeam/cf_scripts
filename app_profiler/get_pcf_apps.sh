@@ -21,12 +21,6 @@
 #
 #
 
-tag=$1;
-dataCenter=$2;
-ipAddr=$3;
-port=$4;
-
-
 # original IFS
 OIFS=$IFS;
 OOFS=$OFS;
