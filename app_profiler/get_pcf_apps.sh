@@ -96,8 +96,10 @@ forward2Splunk() {
 	local dataCenter=$4;
 	local rate=$5;
 	
-	targetFile="${fwdloc}/${tag}/${dataCenter}/${filename}";
+	targetDir="${fwdloc}/${tag}/${dataCenter}";
+	$(mkdir -p "${targetDir}" );
 
+	targetFile="${targetDir}/${filename}";
 	dtm=$(date +%s);
 	#	$( cat ${filename} | sed "s/^/${dtm},/g" | sed "s/$/,${rate}/g" > ${targetFile} );
 	$( cat ${filename} | sed "s/^/${dtm},/g" > ${targetFile} );
@@ -105,9 +107,78 @@ forward2Splunk() {
 	echo "	... generated file forwarded to - ${targetFile}";
 }
 
+usage() {
+	echo "";
+	echo "${1}";
+	echo "Usage: $0 [-l <splunk|statsd>] [-t <tagName>] [-d <dataCenter>] [ [-f <fwdLoc>] or [-i <ipAddr>] [-p <port>] ] " 1>&2; 
+	echo "";
+	exit 1; 
+}
 
+
+
+# ----------------
 # main block
 # ----------------
+while getopts ":l:t:d:f:i:p:" o; do
+    case "${o}" in
+        l)
+            _l=${OPTARG}
+            if [ $_l != "splunk" ] && [ $_l != "statsd" ]; then
+				usage "Invalid logger '${_l}'";
+			fi
+            ;;
+        t)
+            _t=${OPTARG}
+            ;;
+        d)
+            _d=${OPTARG}
+            ;;
+        f)
+            _f=${OPTARG}
+            ;;
+        i)
+            _i=${OPTARG}
+            ;;
+        p)
+            _p=${OPTARG}
+            ;;
+        *)
+            usage;
+            ;;
+    esac
+done
+shift $((OPTIND-1))
+
+# evaluate the arguments
+if [ -z "${_l}" ] || [ -z "${_t}" ] || [ -z "${_d}" ]; then
+    usage
+else
+	if [ $_l == "splunk" ] && [ -z "${_f}" ]; then
+		usage "For Splunk logger, 'forwarder location' is required";
+	elif [ $_l == "statsd" ] && [ -z "${_i}" ]; then
+		usage "For Statsd logger, 'target ipAddress' is required";
+	elif [ $_l == "statsd" ] && [ -z "${_p}" ]; then
+		usage "For Statsd logger, 'port' is required";
+	fi;
+
+	logger="${_l}";
+	tag="${_t}";
+	dataCenter="${_d}";
+	# echo "logger = ${logger}"
+	# echo "tag = ${tag}"
+	# echo "dc = ${dataCenter}"
+
+	fwdLoc="${_f}";
+	# echo "fwdLoc = ${fwdLoc}"
+
+	ipAddr="${_i}";
+	port="${_p}";
+
+	# echo "ipAddr = ${ipAddr}"
+	# echo "port = ${port}"
+fi
+
 
 # where am I targeted?
 whatsMyTarget;
@@ -127,8 +198,12 @@ echo "	... get the app details";
 getDetails;
 echo "	... details file - ${filename}";
 
-send2Statsd "$filename" "$ipAddr" "$port" "$tag" "$dataCenter";
-
-#	forward2Splunk "$filename" "$fwdloc" "$tag" "$dataCenter" "$rate";
+if [ $logger == "statsd" ]; then
+	send2Statsd "$filename" "$ipAddr" "$port" "$tag" "$dataCenter";
+elif [ $logger == "splunk" ]; then
+	forward2Splunk "$filename" "$fwdLoc" "$tag" "$dataCenter" "$rate";
+else
+	echo "Invalid logger, cannot process ...";
+fi;	
 
 echo "	Done!!! ";
