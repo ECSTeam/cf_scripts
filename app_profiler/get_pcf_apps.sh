@@ -23,7 +23,7 @@ whatsMyTarget() {
 login2Pcf() {
 	echo "";
 	# source cf end-point details
-	source "./cf_settings";
+	source "./cf_settings.sh";
 
 	# save the current work dir.
 	CWD=$(pwd);
@@ -44,21 +44,6 @@ login2Pcf() {
 	# return back to workdir
 	# $(cd "${CWD}");
 }
-
-# run-what-1
-profile_apps() {
-	local filename="$1";
-	echo "";
-	echo "$(cf buildpack-usage --verbose | egrep -v '^Following|^$' > ${filename})";
-}
-
-# run-what-2
-list_apps_by_buildpacks() {
-	local filename="$1";
-	echo "";
-	echo "$(cf buildpack-usage --csv | egrep -v '^Following|^$' > ${filename})";
-}
-
 
 send2Statsd() {
 	local filename="${1}";
@@ -157,11 +142,11 @@ usage() {
 # ----------------
 # main block
 # ----------------
-while getopts ":r:l:t:e:f:i:p:" o; do
+while getopts ":r:l:t:e:f:i:p:-:" o; do
     case "${o}" in
         r)
             _r=${OPTARG}
-			((_r == 1 || $_r == 2)) || usage "Invalid profile choice '${_r}}'";
+			((_r == 1 || $_r == 2 || $_r == 3)) || usage "Invalid profile choice '${_r}}'";
             ;;
         l)
             _l=${OPTARG}
@@ -183,6 +168,9 @@ while getopts ":r:l:t:e:f:i:p:" o; do
             ;;
         p)
             _p=${OPTARG}
+            ;;
+        -)    
+            _args=${OPTARG}
             ;;
         *)
             usage;
@@ -219,7 +207,11 @@ else
 
 	# echo "ipAddr = ${ipAddr}"
 	# echo "port = ${port}"
+	# echo " sub args = ${_args}"
 fi
+
+# source common functions
+source "./commons.sh";
 
 
 # where am I targeted?
@@ -248,6 +240,11 @@ case "$runWhat" in
 		echo "	... get buildpacks details";
 		filename="buildpacks_lst.csv";
 		list_apps_by_buildpacks "${filename}";
+		;;
+	3)
+		echo "	... get events";
+		filename="events_lst.csv";
+		list_of_events "${filename}" "--${_args}";
 		;;
 	*)
 		echo "invalid type selected! "

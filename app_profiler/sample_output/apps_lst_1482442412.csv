@@ -1,0 +1,6 @@
+TIMESTAMP,ORIGIN,ORG,SPACE,APPLICATION,STATE,INSTANCES,MEMORY,DISK
+1482442412,pcfdev-local,pcfdev-org,pcfdev-space,cf-nodejs2,STARTED,1,256 MB,512 MB
+1482442412,pcfdev-local,pcfdev-org,pcfdev-space,java-kill,STOPPED,1,1024 MB,512 MB
+1482442412,pcfdev-local,pcfdev-org,pcfdev-space,cf-nodejs,STARTED,1,512 MB,512 MB
+1482442412,pcfdev-local,pcfdev-org,pcfdev-space,simplerules,STARTED,1,800 MB,512 MB
+1482442412,pcfdev-local,pcfdev-org,pcfdev-space,phphello-ask,STARTED,1,128 MB,512 MB

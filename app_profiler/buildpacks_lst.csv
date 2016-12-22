@@ -1,6 +1,0 @@
-ORG,SPACE,APPLICATION,STATE,BUILDPACK
-pcfdev-org,pcfdev-space,cf-nodejs2,STARTED,https://github.com/cloudfoundry/nodejs-buildpack.git
-pcfdev-org,pcfdev-space,java-kill,STARTED,java-buildpack=v3.8.1-offline-https://github.com/cloudfoundry/java-buildpack.git#29c79f2 java-main open-jdk-like-jre=1.8.0_91-unlimited-crypto open-jdk-like-memory-calculator=2.0.2_RELEASE spring-auto-reconfiguration=1.10.0_RELEASE
-pcfdev-org,pcfdev-space,cf-nodejs,STARTED,node.js 1.5.15
-pcfdev-org,pcfdev-space,simplerules,STARTED,java-buildpack=v3.8.1-offline-https://github.com/cloudfoundry/java-buildpack.git#29c79f2 java-main open-jdk-like-jre=1.8.0_91-unlimited-crypto open-jdk-like-memory-calculator=2.0.2_RELEASE spring-auto-reconfiguration=1.10.0_RELEASE
-pcfdev-org,pcfdev-space,phphello-ask,STARTED,https://github.com/cloudfoundry/php-buildpack.git

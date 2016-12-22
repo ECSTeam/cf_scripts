@@ -46,3 +46,23 @@ In both destination formats, the message event is timestamped.
 			  port: port of the Statsd listener
 			  
 ```
+
+
+## Example
+
+* Get list of apps with their allottment details.
+```
+	$> ./get_pcf_apps.sh -r 1 -l splunk -t pcfdev -e local -f /tmp
+```
+
+* List buildpacks and apps that use them.
+```
+	$> ./get_pcf_apps.sh -r 2 -l splunk -t pcfdev -e local -f /tmp
+```
+
+* Get all events for today
+```
+	$> ./get_pcf_apps.sh -r 3 -l splunk -t pcfdev -e local -f /tmp --today
+```
+
+
