@@ -122,7 +122,7 @@ forward2Splunk() {
 	$( head -n 1 ${filename} | sed "s/^/TIMESTAMP,ORIGIN,/g" > ${targetFile} );
 	
 	# append timestamp and env as 1st and 2nd col to each row
-	$( cat ${filename} | grep -v "^ORG" | sed "s/^/${dtm},${locsrc},/g" >> ${targetFile} );
+	$( cat ${filename} | grep -v "ORG,SPACE" | sed "s/^/${dtm},${locsrc},/g" >> ${targetFile} );
 	echo "	... generated file forwarded to - ${targetFile}";
 }
 
