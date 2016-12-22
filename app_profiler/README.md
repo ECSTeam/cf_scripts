@@ -1,10 +1,10 @@
 # App Profiler
 
-This module contains script that profile apps deployed to the targeted PCF foundation. 
+This module contains script that profile apps deployed to the targeted PCF foundation.
 
-The script relies on CATE approved `buildpacks-usage` plugin.
+The script relies on Rahul Jain's modified [buildpacks-usage](https://github.com/rahul-kj/cf_buildpacks_usage) plugin.
 
-Using the plugin, the script extracts verbose details of running application. 
+Using the plugin, the script extracts verbose details of running application.
 
 The script takes a switch `-l`. The valid logger destination options are `splunk` or `statsd`.
 
@@ -16,7 +16,10 @@ In both destination formats, the message event is timestamped.
 
 ## How to run this script
 
-1. Login to the PCF foundation with a privileged account. The account should atleast have `space-developer` access and it should have `org-manager` grants for the PCF Orgs you wish to profile. 
+1. Edit the `cf_settings` and make changes as needed.
+	If using encrypted mode please follow [these](encrypt-password-using-GPG.md) instructions on how to encrypt password with `GngPG` utility. 
+
+2. Login to the PCF foundation with a privileged account. The account should atleast have `space-developer` access and it should have `org-manager` grants for the PCF Orgs you wish to profile. 
 (Please remember to grant org-manager access to this PCF account, all new orgs created).
 
 2. The script can be ran from command line or schedule as a cron job to profile apps on a periodic basis. 
