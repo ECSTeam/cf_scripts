@@ -2,11 +2,11 @@
 
 This module contains script that profile apps deployed to the targeted PCF foundation. 
 
-The script relies on **Rahul Jain's** modified [buildpacks-usage](https://github.com/rahul-kj/cf_buildpacks_usage) plugin.
+The script relies on CATE approved `buildpacks-usage` plugin.
 
 Using the plugin, the script extracts verbose details of running application. 
 
-The script takes a switch `--destination`. The valid destination options are `splunk` or `statsd`.
+The script takes a switch `-l`. The valid logger destination options are `splunk` or `statsd`.
 
 For `splunk` destination, the script assumes you are the Splunk Forwarder and moves the generated csv to the forwarding location for Splunk to consume.
 
@@ -25,13 +25,17 @@ In both destination formats, the message event is timestamped.
 
 ```
 	$> ./get_pcf_apps.sh \
+			[-r <app#>] \
 			[-l <splunk|statsd>] \
 			[-t <tagName>] \ 
-			[-d <dataCenter>] \
+			[-e <envrionment>] \
 			{	[-f <fwdLoc>] or \
 				[-i <ipAddr>] [-p <port>] }
 
 	where:
+		  app# are:
+			1: Get the list of apps
+			2: Get the buildpacks and apps using them
 			tagName: identifier tag  (e.g. NAM | ecs )
 		dataCenter: prod1 or prod2
 			fwdLoc: path to folder, read by Splunk Forwarder
@@ -39,4 +43,3 @@ In both destination formats, the message event is timestamped.
 			  port: port of the Statsd listener
 			  
 ```
-
