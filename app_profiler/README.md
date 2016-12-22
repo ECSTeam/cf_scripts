@@ -2,7 +2,7 @@
 
 This module contains script that profile apps deployed to the targeted PCF foundation.
 
-The script relies on Rahul Jain's modified [buildpacks-usage](https://github.com/rahul-kj/cf_buildpacks_usage) plugin.
+The script relies on Rahul Jain's modified [cf-buildpacks-usage](https://github.com/rahul-kj/cf_buildpacks_usage) plugin.
 
 Using the plugin, the script extracts verbose details of running application.
 
