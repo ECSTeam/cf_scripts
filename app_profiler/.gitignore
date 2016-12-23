@@ -92,6 +92,7 @@ Desktop.ini
 /bin/**
 /spring_loaded/**
 /deploy/**
+/pcfdev/**
 
 ######################
 # Logs
@@ -101,6 +102,7 @@ Desktop.ini
 ######################
 # Others
 ######################
+*.csv
 *.class
 *.*~
 *~

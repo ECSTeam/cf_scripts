@@ -28,16 +28,16 @@ login2Pcf() {
 	# save the current work dir.
 	CWD=$(pwd);
 
-	if [ "${pwd_encrypt}" == "true" ]
+	if [ "${pwd_encrypted}" == "true" ]
 	then
 		# Encrypted password relies on `gpg2`. The assumption here is that, 
 		# the encrypted password and passphrase are in the private location (~/.private)
 
 		# login to pcf with encrypted password
-		$( "${cf}" login -a "${cf_target}" -u "${cf_user}" -p "$(/usr/bin/gpg2 --no-tty --batch --quiet --no-mdc-warning --passphrase-file ~/.private/passphrase.txt --decrypt ~/.private/pwd.gpg)" -o "${cf_org}" -s "${cf_space}" > /dev/null 1>&2);
+		$( "${cf}" login -a "${cf_target}" -u "${cf_user}" -p "$( ${gpg2} --no-tty --batch --quiet --no-mdc-warning --passphrase-file ~/.private/passphrase.txt --decrypt ~/.private/pwd.gpg)" -o "${cf_org}" -s "${cf_space}" "${skip_ssl}" > /dev/null 1>&2);
 	else 
 		# login to pcf with encrypted password
-		$( "${cf}" login -a "${cf_target}" -u "${cf_user}" -p "${cf_pwd}" -o "${cf_org}" -s "${cf_space}" --skip-ssl-validation > /dev/null 1>&2);
+		$( "${cf}" login -a "${cf_target}" -u "${cf_user}" -p "${cf_pwd}" -o "${cf_org}" -s "${cf_space}" "${skip_ssl}" > /dev/null 1>&2);
 
 	fi;
 
