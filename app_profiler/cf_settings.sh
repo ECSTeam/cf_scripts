@@ -1,6 +1,10 @@
-# binaries
+### binaries
+# cf cli 
 cf="/usr/local/bin/cf"
+# GnuPG utility
 gpg2="/usr/local/MacGPG2/bin/gpg2"
+# netcat utility (for statsd only)
+nc="/usr/bin/nc"
 
 # is the password encrypted (gpg2)
 pwd_encrypted=false

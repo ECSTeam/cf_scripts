@@ -80,10 +80,10 @@ send2Statsd() {
 			echo "	app: ${aline[2]}";
 			dtm=$(date +%s);
 			# echo "${event}:${metric}|c ${dtm}" | nc -u -w0 ${ipAddr} ${port};
-			echo "${tag}.${environment}.${aline[0]}.${aline[1]}.${aline[2]}.${hdrs[3]}:${aline[3]}|c" | nc -u -w0 ${ipAddr} ${port};
-			echo "${tag}.${environment}.${aline[0]}.${aline[1]}.${aline[2]}.${hdrs[4]}:${aline[4]}|c" | nc -u -w0 ${ipAddr} ${port};
-			echo "${tag}.${environment}.${aline[0]}.${aline[1]}.${aline[2]}.${hdrs[5]}:${aline[5]}|c" | nc -u -w0 ${ipAddr} ${port};
-			echo "${tag}.${environment}.${aline[0]}.${aline[1]}.${aline[2]}.${hdrs[6]}:${aline[6]}|c" | nc -u -w0 ${ipAddr} ${port};
+			echo "${tag}.${environment}.${aline[0]}.${aline[1]}.${aline[2]}.${hdrs[3]}:${aline[3]}|c" | ${nc} -u -w0 ${ipAddr} ${port};
+			echo "${tag}.${environment}.${aline[0]}.${aline[1]}.${aline[2]}.${hdrs[4]}:${aline[4]}|c" | ${nc} -u -w0 ${ipAddr} ${port};
+			echo "${tag}.${environment}.${aline[0]}.${aline[1]}.${aline[2]}.${hdrs[5]}:${aline[5]}|c" | ${nc} -u -w0 ${ipAddr} ${port};
+			echo "${tag}.${environment}.${aline[0]}.${aline[1]}.${aline[2]}.${hdrs[6]}:${aline[6]}|c" | ${nc} -u -w0 ${ipAddr} ${port};
 		fi;
 	done;
 
