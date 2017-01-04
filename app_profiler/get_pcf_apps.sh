@@ -23,7 +23,7 @@ whatsMyTarget() {
 login2Pcf() {
 	echo "";
 	# source cf end-point details
-	if [ -f "./cf_settings.sh" ]; then
+	if [ -f "./cf_settings.local" ]; then
 		echo "	... found 'cf_settings.local'! Will use it";
 		source "./cf_settings.local";
 	else
