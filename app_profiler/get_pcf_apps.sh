@@ -23,8 +23,12 @@ whatsMyTarget() {
 login2Pcf() {
 	echo "";
 	# source cf end-point details
-	source "./cf_settings.sh";
-	#	source "./cf_settings.local";
+	if [ -f "./cf_settings.sh" ]; then
+		echo "	... found 'cf_settings.local'! Will use it";
+		source "./cf_settings.local";
+	else
+		source "./cf_settings.sh";
+	fi;
 
 	# save the current work dir.
 	CWD=$(pwd);
@@ -130,11 +134,13 @@ forward2Splunk() {
 usage() {
 	echo "";
 	echo "${1}";
-	echo "Usage: $0 [-r <app#>] [-l <splunk|statsd>] [-t <tagName>] [-e <environment>] [ [-f <fwdLoc>] or [-i <ipAddr>] [-p <port>] ] " 1>&2; 
+	echo "Usage: $0 [-r <app#>] [-l <splunk|statsd>] [-t <tagName>] [-e <environment>] [ [-f <fwdLoc>] or [-i <ipAddr>] [-p <port>] ] [addtlArgs]" 1>&2; 
 	echo "	where app# are: ";
 	echo "		1: Get the list of apps"
 	echo "		2: Get the list of buildpacks and apps using them"
 	echo "		3: Get list of microservices events"
+	echo "";
+	echo "	'addtlArgs': for events only, [--today | --yesterday | --date <yyyymmdd>";
 	echo "";
 	exit 1; 
 }
@@ -171,8 +177,11 @@ while getopts ":r:l:t:e:f:i:p:-:" o; do
         p)
             _p=${OPTARG}
             ;;
-        *)
+        -)    
             _args=${OPTARG}
+            ;;
+        *)
+            usage;
             ;;
     esac
 done
@@ -241,9 +250,13 @@ case "$runWhat" in
 		list_apps_by_buildpacks "${filename}";
 		;;
 	3)
-		echo "	... get events";
+		echo "	... get events for '${_args}' ";
 		filename="events_lst.csv";
-		list_of_events "${filename}" "--${_args}";
+		if [ ! -z "${_args}" ]; then
+			list_of_events "${filename}" "--${_args}";
+		else 
+			usage "Missing or invalid argument for events list ";
+		fi;
 		;;
 	*)
 		echo "invalid type selected! "
