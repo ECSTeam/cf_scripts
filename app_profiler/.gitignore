@@ -107,6 +107,7 @@ Desktop.ini
 *.*~
 *~
 .merge_file*
+cf_settings.local
 
 ######################
 # Gradle Wrapper

@@ -24,6 +24,7 @@ login2Pcf() {
 	echo "";
 	# source cf end-point details
 	source "./cf_settings.sh";
+	#	source "./cf_settings.local";
 
 	# save the current work dir.
 	CWD=$(pwd);
@@ -133,6 +134,7 @@ usage() {
 	echo "	where app# are: ";
 	echo "		1: Get the list of apps"
 	echo "		2: Get the list of buildpacks and apps using them"
+	echo "		3: Get list of microservices events"
 	echo "";
 	exit 1; 
 }
@@ -169,11 +171,8 @@ while getopts ":r:l:t:e:f:i:p:-:" o; do
         p)
             _p=${OPTARG}
             ;;
-        -)    
-            _args=${OPTARG}
-            ;;
         *)
-            usage;
+            _args=${OPTARG}
             ;;
     esac
 done
