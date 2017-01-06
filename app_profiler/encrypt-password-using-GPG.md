@@ -24,7 +24,7 @@ To use GPG encyrpted password, follow the steps below
  
 2. Create a plain text file with password (pwd.txt) and passpharase (passphrase.txt). **Make sure that these files have 600 permissions**.
 ```
-  $> chmod 600 pwd.tx passphrase.txt
+  $> chmod 600 pwd.txt passphrase.txt
 ```
  
 3. Encrypt password file
