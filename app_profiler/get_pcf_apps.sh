@@ -154,7 +154,7 @@ while getopts ":r:l:t:e:f:i:p:-:" o; do
     case "${o}" in
         r)
             _r=${OPTARG}
-			((_r == 1 || $_r == 2 || $_r == 3)) || usage "Invalid profile choice '${_r}}'";
+			((_r == 1 || $_r == 2 || $_r == 3 || $_r == 4)) || usage "Invalid profile choice '${_r}}'";
             ;;
         l)
             _l=${OPTARG}
@@ -257,6 +257,11 @@ case "$runWhat" in
 		else 
 			usage "Missing or invalid argument for events list ";
 		fi;
+		;;
+	4)
+		echo "	... get space use ";
+		filename="space_use_lst.csv";
+		space_use_list "${filename}" "-f csv";
 		;;
 	*)
 		echo "invalid type selected! "

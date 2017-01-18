@@ -22,3 +22,11 @@ list_of_events() {
 	echo "$(cf get-events ${args} | egrep -v '^Following|^$' > ${filename})";
 }
 
+# get space use deatils, in csv format
+space_use_list() {
+	local filename="$1";
+	local args="$2";
+	echo "";
+	echo "$(cf usage-report ${args} | egrep -v '^Following|^$' > ${filename})";
+}
+
