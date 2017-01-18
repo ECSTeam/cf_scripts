@@ -65,4 +65,7 @@ In both destination formats, the message event is timestamped.
 	$> ./get_pcf_apps.sh -r 3 -l splunk -t pcfdev -e local -f /tmp --today
 ```
 
-
+* Get space details (quotas, use)
+```
+	$> ./get_pcf_apps.sh -r 4 -l splunk -t pcfdev -e local -f /tmp
+```

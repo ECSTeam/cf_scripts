@@ -139,6 +139,7 @@ usage() {
 	echo "		1: Get the list of apps"
 	echo "		2: Get the list of buildpacks and apps using them"
 	echo "		3: Get list of microservices events"
+	echo "		4: Get space details (quotas, use)"
 	echo "";
 	echo "	'addtlArgs': for events only, [--today | --yesterday | --date <yyyymmdd>";
 	echo "";
