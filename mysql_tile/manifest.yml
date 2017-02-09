@@ -1,0 +1,11 @@
+---
+applications:
+- name: spring-music
+  memory: 2048M
+  instances: 1
+  buildpack: java_buildpack_offline
+  host: spring-music-tile-upgrade-test
+  path: ./spring-music.jar
+  services:
+  - spring-music-mysql
+
