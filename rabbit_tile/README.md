@@ -15,10 +15,15 @@ The attached application comes from a build of the [RabbitMQ sample app] (https:
 The following environment variables are required to be set:
 
 CF_API_URL:  the api endpoint of your foundation.
+
 CF_USER_NAME:  the username of the account that will perform the `cf cs` and `cf push` commands.
+
 CF_CREDENTIALS: the password for that user.
+
 TARGET_ORG:  the org in which the service instance will be created and the app pushed.
+
 TARGET_SPACE:  the space in which the service instance will be created and the app pushed.
+
 CF_APPS_DOMAIN:  the apps domain. 
 
 This script should be run after a RabbitMQ tile upgrade to verify that the upgrade has no breaking changes to Java apps bound to Rabbit Services.
