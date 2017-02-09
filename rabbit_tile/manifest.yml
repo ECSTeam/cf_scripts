@@ -1,0 +1,7 @@
+---
+applications:
+  - name: rabbitmq_test
+    buildpack: java_buildpack_offline
+    path: ./rabbitmq-test.jar
+services:
+  - rabbitmq_sv
