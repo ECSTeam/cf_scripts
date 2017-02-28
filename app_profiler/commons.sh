@@ -30,3 +30,9 @@ space_use_list() {
 	echo "$(cf usage-report ${args} | egrep -v '^Following|^$' > ${filename})";
 }
 
+# get the list of buildpacks, and their status, in csv format
+list_buildpacks_status() {
+	local filename="$1";
+	echo "";
+	echo "$(cf buildpacks | egrep -v 'Getting|^$' | tr -s ' ' | sed -e 's/ /,/g' > ${filename})";
+}
