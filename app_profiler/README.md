@@ -42,8 +42,8 @@ In both destination formats, the message event is timestamped.
                 4: Get space details (quotas, use)
                 5: Get buildpacks status details
 
-			'tagName':     identifier tag  (e.g. nam )
-			'environment': PCF foundation identifier (e.g. prod1, perf1)
+			'tagName':     identifier tag  (e.g. ecs )
+			'environment': PCF foundation identifier (e.g. lab02, lab03)
 			'fwdLoc':      path to folder, read by Splunk Forwarder (e.g ./outputs)
 			'ipAddr':      ip address of the 'Statsd' listener 
 			'port':        port of the 'Statsd' listener
