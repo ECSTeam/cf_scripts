@@ -126,8 +126,13 @@ forward2Splunk() {
 	# append headers for timestamp and env as 1st and 2nd col
 	$( head -n 1 ${filename} | sed "s/^/TIMESTAMP,ORIGIN,/g" > ${targetFile} );
 	
+	# get no of lines in the output file
+	lc=$(cat ${filename} | wc -l)
+	lc2=$((lc -1))
+	
 	# append timestamp and env as 1st and 2nd col to each row
-	$( cat ${filename} | grep -v "ORG,SPACE" | sed "s/^/${dtm},${locsrc},/g" >> ${targetFile} );
+	$( tail -${lc2} ${filename} | grep -vi "ORG" | sed "s/^/${dtm},${locsrc},/g" >> ${targetFile} );
+
 	echo "	... generated file forwarded to - ${targetFile}";
 }
 
@@ -140,6 +145,7 @@ usage() {
 	echo "		2: Get the list of buildpacks and apps using them"
 	echo "		3: Get list of microservices events"
 	echo "		4: Get space details (quotas, use)"
+	echo "		5: Get buildpacks status details"
 	echo "";
 	echo "	'addtlArgs': for events only, [--today | --yesterday | --date <yyyymmdd>";
 	echo "";
@@ -155,7 +161,7 @@ while getopts ":r:l:t:e:f:i:p:-:" o; do
     case "${o}" in
         r)
             _r=${OPTARG}
-			((_r == 1 || $_r == 2 || $_r == 3 || $_r == 4)) || usage "Invalid profile choice '${_r}}'";
+			((_r == 1 || $_r == 2 || $_r == 3 || $_r == 4 || $_r == 5)) || usage "Invalid profile choice '${_r}}'";
             ;;
         l)
             _l=${OPTARG}
@@ -263,6 +269,11 @@ case "$runWhat" in
 		echo "	... get space use ";
 		filename="space_use_lst.csv";
 		space_use_list "${filename}" "-f csv";
+		;;
+	5)
+		echo "	... get buildpacks status";
+		filename="buildpacks_status.csv";
+		list_buildpacks_status "${filename}";
 		;;
 	*)
 		echo "invalid type selected! "
