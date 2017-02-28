@@ -33,18 +33,22 @@ In both destination formats, the message event is timestamped.
 			[-t <tagName>] \ 
 			[-e <envrionment>] \
 			{	[-f <fwdLoc>] or \
-				[-i <ipAddr>] [-p <port>] }
+				[-i <ipAddr>] [-p <port>] } [addtlArgs]
 
-	where:
-		  app# are:
-			1: Get the list of apps
-			2: Get the buildpacks and apps using them
-			tagName: identifier tag  (e.g. NAM | ecs )
-		dataCenter: prod1 or prod2
-			fwdLoc: path to folder, read by Splunk Forwarder
-			ipAddr: ip address of the Statsd listener 
-			  port: port of the Statsd listener
-			  
+		where 'app#' are:
+                1: Get the list of apps
+                2: Get the list of buildpacks and apps using them
+                3: Get list of microservices events
+                4: Get space details (quotas, use)
+                5: Get buildpacks status details
+
+			'tagName':     identifier tag  (e.g. nam )
+			'environment': PCF foundation identifier (e.g. prod1, perf1)
+			'fwdLoc':      path to folder, read by Splunk Forwarder (e.g ./outputs)
+			'ipAddr':      ip address of the 'Statsd' listener 
+			'port':        port of the 'Statsd' listener
+			'addtlArgs':   for events only, [--today | --yesterday | --date <yyyymmdd>
+
 ```
 
 
